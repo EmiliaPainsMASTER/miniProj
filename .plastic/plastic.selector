@@ -1,4 +1,0 @@
-repository "miniProj@EmiliaPains@cloud"
-  path "/"
-    br "/main"
-    co "/main"
