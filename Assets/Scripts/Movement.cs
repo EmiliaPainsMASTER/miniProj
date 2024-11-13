@@ -5,29 +5,25 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     // Movement speed as a float
-    public float _speed = 5.0f;
-
+    private float _speed = 5.0f;
+    
     // Store the current movement direction
-    public Vector3 _moveDirection = Vector3.zero;
+    private Rigidbody _rb;
+    public float force;
 
     // Update is called once per frame
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
     void Update()
     {
         // Update moveDirection based on input
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            _moveDirection = Vector3.left;
+            _rb.AddForce(Vector3.up * force * Time.deltaTime);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            _moveDirection = Vector3.right;
-        }
-        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            _moveDirection = Vector3.forward;
-        }
-
         // Apply movement in the current direction
-        transform.Translate(_moveDirection * _speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 }
