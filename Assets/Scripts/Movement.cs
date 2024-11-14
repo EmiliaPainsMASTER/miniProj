@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     
     // Store the current movement direction
     private Rigidbody _rb;
-    public float force;
+    private float force = 2500;
 
     // Update is called once per frame
     void Start()
@@ -18,12 +18,22 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
+        //TODO add a isGrounded function to prevent the cat from flying into the air
         // Update moveDirection based on input
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
             _rb.AddForce(Vector3.up * force * Time.deltaTime);
         }
-        // Apply movement in the current direction
+        //if player position is at - 50 increase speed
+        if(transform.position.x >= 55)
+        {
+            _speed = 7.5f;
+        }
+        //ToDo check background (denotes where a level ends) positions using barriers 
+        // if(transform.position.x >= 55)
+        // {
+        //     _speed = 7.5f;
+        // }
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 }
